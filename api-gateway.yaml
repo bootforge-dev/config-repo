@@ -20,6 +20,11 @@ spring:
               predicates:
                 - Path=/api/v1/inventories/**
 
+            - id: order-service
+              uri: lb://order-service
+              predicates:
+                - Path=/api/v1/orders/**
+
             - id: product-service-openapi
               uri: lb://product-service
               predicates:
@@ -34,6 +39,13 @@ spring:
               filters:
                 - RewritePath=/inventory-service/v3/api-docs, /v3/api-docs
 
+            - id: order-service-openapi
+              uri: lb://order-service
+              predicates:
+                - Path=/order-service/v3/api-docs
+              filters:
+                - RewritePath=/order-service/v3/api-docs, /v3/api-docs
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
@@ -43,3 +55,6 @@ springdoc:
 
       - name: Inventory Service
         url: /inventory-service/v3/api-docs
+
+      - name: Order Service
+        url: /order-service/v3/api-docs
